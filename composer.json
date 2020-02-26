@@ -1,0 +1,7 @@
+{
+    "name": "myrostadler/namestream",
+    "description": "Random name generator",
+    "type": "library",
+    "license": "MIT",
+    "require": {}
+}
