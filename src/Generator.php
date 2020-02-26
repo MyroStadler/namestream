@@ -18,7 +18,10 @@ class Generator
         'dd' => 'abcefghijklmnopqrst',
         'd' => self::ALL_LETTERS,
     ];
-    const BLOCKS = [
+    const TERMINATORS = [
+        'qu' => 0,
+    ];
+    const EXCLUDES = [
         'k' => 'c',
     ];
 
@@ -39,6 +42,9 @@ class Generator
             return false;
         }
         if (!$this->containsVowel($word)) {
+            return false;
+        }
+        if ($this->isIllegalTerminator($word)) {
             return false;
         }
         if ($len >= $this->maxWordLength) {
@@ -86,8 +92,8 @@ class Generator
                 continue;
             }
             $last = substr($word, -$n);
-            if (array_key_exists($last, self::BLOCKS)) {
-                $blocked = self::BLOCKS[$last];
+            if (array_key_exists($last, self::EXCLUDES)) {
+                $blocked = self::EXCLUDES[$last];
                 for ($ii = 0; $ii < strlen($blocked); $ii++) {
                     $from = str_replace($blocked[$ii], '', $from);
                 }
@@ -101,6 +107,21 @@ class Generator
             $from = self::ALL_LETTERS;
         }
         return $from[mt_rand(0, strlen($from) - 1)];
+    }
+
+    protected function isIllegalTerminator(string $word): bool {
+        $i = 3;
+        while ($i > 0) {
+            $n = $i--;
+            if (strlen($word) < $n) {
+                continue;
+            }
+            $last = substr($word, -$n);
+            if (array_key_exists($last, self::TERMINATORS) && !self::TERMINATORS[$last]) {
+                return true;
+            }
+        }
+        return false;
     }
 
     protected function containsVowel(string $letters): bool {
