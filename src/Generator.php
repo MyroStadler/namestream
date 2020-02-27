@@ -15,8 +15,12 @@ class Generator
     const STREAMS = [
         'q' => 'u',
         'qu' => 'aeio',
-        'dd' => 'abcefghijklmnopqrst',
         'd' => self::ALL_LETTERS,
+        'dd' => 'abcefghijklmnopqrst',
+        't' => self::ALL_LETTERS,
+        'tt' => 'abcdefghijklmnopqrs',
+        'td' => 'abcefghijklmnopqrs',
+        'dt' => 'abcefghijklmnopqrs',
     ];
     const TERMINATORS = [
         'qu' => 0,
@@ -24,6 +28,10 @@ class Generator
     const EXCLUDES = [
         'k' => 'c',
     ];
+
+    public function g(): string {
+        return $this->generate();
+    }
 
     public function generate(): string {
         $word = '';

@@ -11,14 +11,14 @@ class GeneratorTest extends TestCase
 {
     public function testGeneratesWord() {
         $g = new Generator();
-        $word = $g->generate();
+        $word = $g->g();
         $this->assertNotEmpty($word);
     }
 
     public function testExamples() {
         $g = new Generator();
-        for ($i = 0; $i < 100; $i++) {
-            printf("\n%s %s", $g->generate(), $g->generate());
+        for ($i = 0; $i < 1000; $i++) {
+            printf("\n%s %s", $g->g(), $g->g());
         }
         $this->assertTrue(true);
     }
