@@ -6,8 +6,11 @@ namespace Myro\NameStream;
 
 class Generator
 {
+    // it's a rule, will never be shorter than this
     public $minWordLength = 2;
-    public $maxWordLength = 16;
+
+    // it's ideal, may be longer if ends in an illegal terminator
+    public $idealMaxWordLength = 16;
 
     const ALL_LETTERS = 'abcdefghijklmnopqrst';
     const VOWEL_LETTERS = 'aeiou';
@@ -55,10 +58,10 @@ class Generator
         if ($this->isIllegalTerminator($word)) {
             return false;
         }
-        if ($len >= $this->maxWordLength) {
+        if ($len >= $this->idealMaxWordLength) {
             return true;
         }
-        $chance = 0.6 + 0.4 * ($len / $this->maxWordLength);
+        $chance = 0.6 + 0.4 * ($len / $this->idealMaxWordLength);
         return $this->rand() >= $chance;
     }
 
