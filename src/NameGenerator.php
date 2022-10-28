@@ -4,7 +4,7 @@
 namespace Myro\NameStream;
 
 
-class Generator
+class NameGenerator implements StringGeneratorInterface
 {
     // it's a rule, will never be shorter than this
     public $minWordLength = 2;
