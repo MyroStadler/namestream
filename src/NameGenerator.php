@@ -113,7 +113,7 @@ class NameGenerator implements StringGeneratorInterface
         return $word . $this->pick($from);
     }
 
-    protected function pick(string $from = null): string {
+    protected function pick(?string $from = null): string {
         if (!$from) {
             $from = self::ALL_LETTERS;
         }
